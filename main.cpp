@@ -6,9 +6,11 @@
 using namespace std;
 
 extern int yylex();
+extern int yyparse();
 extern void yyterminate();
 extern const char *yytext;
 extern FILE *yyin;
+extern FILE *yyout;
 
 int line_no = 0;
 
@@ -20,6 +22,7 @@ void parse_error(string msg, int line_no)
 
 int main(int argc, char *argv[])
 {
+
     if (argc > 1)
     {
         yyin = fopen(argv[1], "r+");
@@ -29,6 +32,12 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
+    //yyout = stdout;
+
+    yyparse();
+
+    //return yyparse();
+    /*
     int type = 0;
 
     while ((type = yylex()))
@@ -42,10 +51,14 @@ int main(int argc, char *argv[])
         {
             printf("=> \\n\n");
         }
+        else if (strcmp(yytext, " ") == 0)
+        {
+            printf("=> '%s'\n", yytext);
+        }
         else
         {
             printf("=> %s\n", yytext);
         }
-    }
+    }*/
     return 0;
 }

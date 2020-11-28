@@ -4,6 +4,7 @@
  */
 
 #include "types.h"
+#include "y.tab.h"
 
 extern int line_no;
 %} 
@@ -26,12 +27,13 @@ extern int line_no;
 "else"                  { return T_ELSE; }
 "while"                 { return T_WHILE; }
 "for"                   { return T_FOR; }
-[0-9]+                  { return T_INT; }
-[0-9]*\.[0-9]+          { return T_FLOAT; }
+[0-9]+                  { yylval = atoi(yytext); return T_INT; }
+[0-9]*\.[0-9]+          { yylval = atof(yytext); return T_FLOAT; }
 ('[^'\n]*')             { return T_STRING; }
 (\"[^\"\n]*\")          { return T_STRING; }
 [ \t]                   { return T_SPACE; }
 [_a-zA-Z][a-zA-Z0-9]*   { return T_IDENT; }
+
 .                       { return T_ERROR; }
 %%
 
