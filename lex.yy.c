@@ -766,7 +766,6 @@ YY_RULE_SETUP
 { line_no++; return yytext[0]; }
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
 #line 13 "lex.l"
 { return yytext[0]; }
@@ -862,7 +861,6 @@ YY_RULE_SETUP
 { return T_STRING; }
 	YY_BREAK
 case 21:
-/* rule 21 can match eol */
 YY_RULE_SETUP
 #line 32 "lex.l"
 { return T_SPACE; }
@@ -882,7 +880,7 @@ YY_RULE_SETUP
 #line 35 "lex.l"
 ECHO;
 	YY_BREAK
-#line 886 "lex.yy.c"
+#line 884 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

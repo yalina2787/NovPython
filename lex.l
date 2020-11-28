@@ -10,7 +10,7 @@ extern int line_no;
 
 %%
 "\n"                    { line_no++; return yytext[0]; }
-[+*-/^%=#<>():\n]       { return yytext[0]; }
+[+*-/^%=#<>():]         { return yytext[0]; }
 "+="                    { return T_PLUS_EQ; }
 "-="                    { return T_MINUS_EQ; }
 "*="                    { return T_TIMES_EQ; }
@@ -29,7 +29,7 @@ extern int line_no;
 [0-9]+                  { return T_INT; }
 [0-9]*\.[0-9]+          { return T_FLOAT; }
 ('[^'\n]*')             { return T_STRING; }
-[ \t\n]                 { return T_SPACE; }
+[ \t]                   { return T_SPACE; }
 [_a-zA-Z][a-zA-Z0-9]*   { return T_IDENT; }
 .                       { return T_ERROR; }
 %%
