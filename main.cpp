@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
         }
     }
     int type = 0;
+
     while ((type = yylex()))
     {
         if (type == T_ERROR)

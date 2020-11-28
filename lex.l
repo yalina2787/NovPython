@@ -29,6 +29,7 @@ extern int line_no;
 [0-9]+                  { return T_INT; }
 [0-9]*\.[0-9]+          { return T_FLOAT; }
 ('[^'\n]*')             { return T_STRING; }
+(\"[^\"\n]*\")          { return T_STRING; }
 [ \t]                   { return T_SPACE; }
 [_a-zA-Z][a-zA-Z0-9]*   { return T_IDENT; }
 .                       { return T_ERROR; }
