@@ -81,6 +81,7 @@
 #line 1 "syntax.y"
 
 #include <stdio.h>
+#include "nov-python.h"
 
 extern int yylex();
 
@@ -118,7 +119,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 122 "y.tab.c"
+#line 123 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -1357,7 +1358,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1361 "y.tab.c"
+#line 1362 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

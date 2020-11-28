@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include "nov-python.h"
 
 extern int yylex();
 
@@ -12,7 +13,6 @@ void yyerror(const char* msg) {}
 
 %left '+' '-'
 %left '*' '/'
-
 
 %%
 

@@ -1,0 +1,6 @@
+
+class NovExpression
+{
+public:
+    NovExpression(){};
+};
