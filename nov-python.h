@@ -1,6 +1,0 @@
-
-class NovExpression
-{
-public:
-    NovExpression(){};
-};

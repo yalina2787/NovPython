@@ -81,7 +81,7 @@
 #line 1 "syntax.y"
 
 #include <stdio.h>
-#include "nov-python.h"
+#include "nov-python.hpp"
 
 extern int yylex();
 
@@ -404,8 +404,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    19,    19,    20,    23,    24,    25,    26,    27,    28,
-      29
+       0,    20,    20,    21,    24,    25,    26,    27,    28,    29,
+      30
 };
 #endif
 
@@ -1312,47 +1312,47 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 19 "syntax.y"
+#line 20 "syntax.y"
     { printf("ans = %d\n", (yyvsp[(2) - (3)])); }
     break;
 
   case 3:
-#line 20 "syntax.y"
+#line 21 "syntax.y"
     { /* empty */ }
     break;
 
   case 4:
-#line 23 "syntax.y"
+#line 24 "syntax.y"
     { (yyval) = (yyvsp[(1) - (3)]) + (yyvsp[(3) - (3)]); }
     break;
 
   case 5:
-#line 24 "syntax.y"
+#line 25 "syntax.y"
     { (yyval) = (yyvsp[(1) - (3)]) - (yyvsp[(3) - (3)]); }
     break;
 
   case 6:
-#line 25 "syntax.y"
+#line 26 "syntax.y"
     { (yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]); }
     break;
 
   case 7:
-#line 26 "syntax.y"
+#line 27 "syntax.y"
     { (yyval) = (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]); }
     break;
 
   case 8:
-#line 27 "syntax.y"
-    { (yyval) = (yyvsp[(1) - (1)]); }
-    break;
-
-  case 9:
 #line 28 "syntax.y"
     { (yyval) = (yyvsp[(1) - (1)]); }
     break;
 
-  case 10:
+  case 9:
 #line 29 "syntax.y"
+    { (yyval) = (yyvsp[(1) - (1)]); }
+    break;
+
+  case 10:
+#line 30 "syntax.y"
     { (yyval) = (yyvsp[(2) - (3)]); }
     break;
 
@@ -1572,6 +1572,6 @@ yyreturn:
 }
 
 
-#line 32 "syntax.y"
+#line 33 "syntax.y"
 
 

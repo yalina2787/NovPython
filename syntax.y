@@ -1,18 +1,18 @@
 %{
 #include <stdio.h>
-#include "nov-python.h"
+#include "nov-python.hpp"
 
 extern int yylex();
 
 void yyerror(const char* msg) {}
 %}
 
-
 %token   T_INT 
 %token   T_FLOAT
 
 %left '+' '-'
 %left '*' '/'
+
 
 %%
 
