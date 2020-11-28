@@ -40,11 +40,11 @@ int main(int argc, char *argv[])
         }
         else if (strcmp(yytext, "\n") == 0)
         {
-            printf("=> '\\n'\n");
+            printf("=> \\n\n");
         }
         else
         {
-            printf("=> '%s'\n", yytext);
+            printf("=> %s\n", yytext);
         }
     }
     return 0;
