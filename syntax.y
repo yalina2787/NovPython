@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <math.h>
 #include "nov-python.hpp"
 
 extern int yylex();
@@ -11,7 +12,8 @@ void yyerror(const char* msg) {}
 %token   T_FLOAT
 
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%' 
+%left '^'
 
 
 %%
@@ -24,6 +26,8 @@ E   :   E '+' E         { $$ = $1 + $3; }
     |   E '-' E         { $$ = $1 - $3; }
     |   E '*' E         { $$ = $1 * $3; }
     |   E '/' E         { $$ = $1 / $3; }
+    |   E '%' E         { $$ = $1 % $3; }
+    |   E '^' E         { $$ = pow($1, $3); }
     |   T_INT           { $$ = $1; }
     |   T_FLOAT         { $$ = $1; }
     |   '(' E ')'       { $$ = $2; }

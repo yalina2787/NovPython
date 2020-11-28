@@ -32,11 +32,8 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
-    //yyout = stdout;
-
     yyparse();
 
-    //return yyparse();
     /*
     int type = 0;
 
