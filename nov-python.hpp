@@ -13,10 +13,10 @@ class Value
 public:
     Value() {}
     Value(const Value &value) : intValue(value.intValue), doubleValue(value.doubleValue), stringValue(value.stringValue), type(value.type) {}
-    Value(const int value) : intValue(value), type(0) { cout << "Int " << value << endl; }
-    Value(const double value) : doubleValue(value), type(1) { cout << "Double " << value << endl; }
-    Value(const string value) : stringValue(value), type(3) { cout << "String " << value << endl; }
-    Value(const bool value) : intValue(value ? 1 : 0), type(2) { cout << "Bool " << value << endl; }
+    Value(const int value) : intValue(value), type(0) {}
+    Value(const double value) : doubleValue(value), type(1) {}
+    Value(const string value) : stringValue(value), type(3) {}
+    Value(const bool value) : intValue(value ? 1 : 0), type(2) {}
     void copy(const Value &value)
     {
         intValue = value.intValue;
@@ -30,6 +30,7 @@ public:
     int type; // 0: int 1: double 2: bool 3: string
 
     friend ostream &operator<<(ostream &out, Value &A);
+
     Value &operator=(const Value &b)
     {
         intValue = b.intValue;

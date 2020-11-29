@@ -39,7 +39,14 @@ extern int line_no;
 [0-9]+                  { yylval.intValue = atoi(yytext); return T_INT; }
 [0-9]*\.[0-9]+          { yylval.floatValue = atof(yytext); return T_FLOAT; }
 [_a-zA-Z][a-zA-Z0-9]*   { yylval.identValue = new char[strlen(yytext)+1]; strcpy(yylval.identValue, yytext); return T_IDENT; }
-(\"[^\"\n]*\")          { yylval.stringValue = new char[strlen(yytext)-1]; strncpy(yylval.stringValue, yytext+1, strlen(yytext)-2); return T_STRING; }
+(\"[^\"\n]*\")          { yylval.stringValue = new char[strlen(yytext)+1]; 
+                          strncpy(yylval.stringValue, yytext+1, strlen(yytext)-2); 
+                          return T_STRING; 
+                        }
+('[^'\n]*')             { yylval.stringValue = new char[strlen(yytext)+1]; 
+                          strncpy(yylval.stringValue, yytext+1, strlen(yytext)-2); 
+                          return T_STRING; 
+                        }
 
 .                       { return T_ERROR; }
 %%

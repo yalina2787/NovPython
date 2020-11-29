@@ -25,7 +25,6 @@ ostream &operator<<(ostream &out, Value &A)
 Value NovExpression::evaluate(const Vars &vars) const
 {
     Value value(0);
-    //cout << e1 << " " << op << " " << e2 << endl;
     if (e1 != NULL && e2 != NULL)
     {
         // Binary Expression
@@ -79,7 +78,7 @@ void NovAssignment::evaluate(Vars &vars)
     {
         cout << "Evaluate NovAssignment: " << identName << " += " << value << endl;
         value = vars.fetch(identName) + value;
-        vars.write(identName, e1->evaluate(vars));
+        vars.write(identName, value);
     }
     else if (op == "print")
     {
