@@ -4,7 +4,8 @@
  */
 
 #include "types.h"
-#include "y.tab.h"
+#include "nov-python.hpp"
+#include "parser.hpp"
 
 extern int line_no;
 %} 
@@ -27,8 +28,8 @@ extern int line_no;
 "else"                  { return T_ELSE; }
 "while"                 { return T_WHILE; }
 "for"                   { return T_FOR; }
-[0-9]+                  { yylval = atoi(yytext); return T_INT; }
-[0-9]*\.[0-9]+          { yylval = atof(yytext); return T_FLOAT; }
+[0-9]+                  { yylval.intValue = atoi(yytext); return T_INT; }
+[0-9]*\.[0-9]+          { yylval.floatValue = atof(yytext); return T_FLOAT; }
 ('[^'\n]*')             { return T_STRING; }
 (\"[^\"\n]*\")          { return T_STRING; }
 [ \t]                   { return T_SPACE; }
