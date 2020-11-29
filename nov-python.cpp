@@ -11,9 +11,13 @@ ostream &operator<<(ostream &out, Value &A)
     {
         out << (A.intValue == 0 ? "False" : "True");
     }
-    else
+    else if (A.type == 1)
     {
         out << A.doubleValue;
+    }
+    else
+    {
+        out << A.stringValue;
     }
     return out;
 }
@@ -27,8 +31,6 @@ Value NovExpression::evaluate(const Vars &vars) const
         // Binary Expression
         if (op == '+')
         {
-            Value vvv = e1->evaluate(vars) + e2->evaluate(vars);
-            cout << "+:" << vvv << endl;
             return e1->evaluate(vars) + e2->evaluate(vars);
         }
         else if (op == '-')
@@ -70,24 +72,29 @@ void NovAssignment::evaluate(Vars &vars)
     Value value = e1->evaluate(vars);
     if (op == "=")
     {
+        cout << "Evaluate NovAssignment: " << identName << " = " << value << endl;
         vars.write(identName, e1->evaluate(vars));
     }
     else if (op == "+=")
     {
+        cout << "Evaluate NovAssignment: " << identName << " += " << value << endl;
         value = vars.fetch(identName) + value;
         vars.write(identName, e1->evaluate(vars));
     }
-    cout << "Evaluate Assignment: " << value << endl;
+    else if (op == "print")
+    {
+        cout << value << endl;
+    }
 }
 
 void NovStatement::evaluate(Vars &vars)
 {
-    cout << "Evaluate NovStatement: " << endl;
+    cout << "Evaluate NovStatement" << endl;
 }
 
 void NovStatementList::evaluate(Vars &vars)
 {
-    cout << "Evaluate NovStatementList: " << endl;
+    cout << "Evaluate NovStatementList" << endl;
     list<NovStatement *>::iterator it = stmtList.begin();
     for (it = stmtList.begin(); it != stmtList.end(); it++)
     {
@@ -97,6 +104,6 @@ void NovStatementList::evaluate(Vars &vars)
 
 void NovProgram::evaluate()
 {
-    cout << "Evaluate NovProgram: " << endl;
+    cout << "Evaluate NovProgram" << endl;
     statmentList->evaluate(vars);
 }

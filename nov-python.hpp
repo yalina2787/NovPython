@@ -12,32 +12,40 @@ class Value
 {
 public:
     Value() {}
-    Value(const Value &value) : intValue(value.intValue), doubleValue(value.doubleValue), type(value.type) {}
-    Value(const int value) : intValue(value), type(0) {}
-    Value(const double value) : doubleValue(value), type(1) {}
-    Value(const bool value) : intValue(value ? 1 : 0), type(2) {}
+    Value(const Value &value) : intValue(value.intValue), doubleValue(value.doubleValue), stringValue(value.stringValue), type(value.type) {}
+    Value(const int value) : intValue(value), type(0) { cout << "Int " << value << endl; }
+    Value(const double value) : doubleValue(value), type(1) { cout << "Double " << value << endl; }
+    Value(const string value) : stringValue(value), type(3) { cout << "String " << value << endl; }
+    Value(const bool value) : intValue(value ? 1 : 0), type(2) { cout << "Bool " << value << endl; }
     void copy(const Value &value)
     {
         intValue = value.intValue;
         doubleValue = value.doubleValue;
+        stringValue = value.stringValue;
         type = value.type;
     }
     double doubleValue;
     int intValue;
-    int type; // 0: int 1: double 2: bool
+    string stringValue;
+    int type; // 0: int 1: double 2: bool 3: string
 
     friend ostream &operator<<(ostream &out, Value &A);
     Value &operator=(const Value &b)
     {
         intValue = b.intValue;
         doubleValue = b.doubleValue;
+        stringValue = b.stringValue;
         type = b.type;
         return *this;
     }
 
     Value operator+(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -63,7 +71,11 @@ public:
 
     Value operator-(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -88,7 +100,11 @@ public:
     }
     Value operator*(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -113,7 +129,11 @@ public:
     }
     Value operator/(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -138,7 +158,11 @@ public:
     }
     Value operator^(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -163,7 +187,11 @@ public:
     }
     Value operator<(const Value &b)
     {
-        if (type == 0 || type == 2)
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
         {
             if (b.type == 0 || b.type == 2)
             {
@@ -196,10 +224,7 @@ class NovExpression
 public:
     virtual Value evaluate(const Vars &vars) const;
     NovExpression(){};
-    NovExpression(NovExpression *_e1, int _op, NovExpression *_e2) : e1(_e1), e2(_e2), op(_op)
-    {
-        cout << "Expression::" << op << endl;
-    };
+    NovExpression(NovExpression *_e1, int _op, NovExpression *_e2) : e1(_e1), e2(_e2), op(_op){};
 
 protected:
     NovExpression *e1;
@@ -211,10 +236,7 @@ class NovConstant : public NovExpression
 {
 public:
     virtual Value evaluate(const Vars &vars) const;
-    NovConstant(Value _value) : value(_value)
-    {
-        cout << "Constant::" << value << endl;
-    };
+    NovConstant(Value _value) : value(_value){};
     Value value;
 };
 
@@ -222,10 +244,7 @@ class NovIdent : public NovExpression
 {
 public:
     virtual Value evaluate(const Vars &vars) const;
-    NovIdent(char *_name) : name(_name)
-    {
-        cout << "Name::" << name << endl;
-    };
+    NovIdent(string _name) : name(_name){};
     string name;
 };
 
@@ -298,7 +317,6 @@ public:
     void evaluate();
     NovProgram(NovStatementList *_statmentList) : statmentList(_statmentList)
     {
-        cout << "Program:" << endl;
     }
     Vars vars;
     NovStatementList *statmentList;

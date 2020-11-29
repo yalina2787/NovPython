@@ -43,9 +43,11 @@
      T_FALSE = 259,
      T_INT = 260,
      T_FLOAT = 261,
-     T_IDENT = 262,
-     T_SPACE = 263,
-     T_PLUS_EQ = 264
+     T_STRING = 262,
+     T_IDENT = 263,
+     T_SPACE = 264,
+     T_PLUS_EQ = 265,
+     T_PRINT = 266
    };
 #endif
 /* Tokens.  */
@@ -53,9 +55,11 @@
 #define T_FALSE 259
 #define T_INT 260
 #define T_FLOAT 261
-#define T_IDENT 262
-#define T_SPACE 263
-#define T_PLUS_EQ 264
+#define T_STRING 262
+#define T_IDENT 263
+#define T_SPACE 264
+#define T_PLUS_EQ 265
+#define T_PRINT 266
 
 
 
@@ -68,13 +72,14 @@ typedef union YYSTYPE
     bool boolValue;
     double floatValue;
     char* identValue;
+    char* stringValue;
     NovExpression* expression;
     NovStatement* statement;
     NovStatementList* statementList;
     NovProgram* program;
 }
 /* Line 1529 of yacc.c.  */
-#line 78 "parser.hpp"
+#line 83 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
