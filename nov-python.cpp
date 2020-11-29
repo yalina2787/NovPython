@@ -16,7 +16,7 @@ ostream &operator<<(ostream &out, Value &A)
 
 Value NovExpression::evaluate() const
 {
-    Value value(10);
+    Value value(0);
     //cout << e1 << " " << op << " " << e2 << endl;
     if (e1 != NULL && e2 != NULL)
     {
@@ -27,11 +27,37 @@ Value NovExpression::evaluate() const
             cout << "+:" << vvv << endl;
             return e1->evaluate() + e2->evaluate();
         }
+        else if (op == '-')
+        {
+            return e1->evaluate() - e2->evaluate();
+        }
+        else if (op == '*')
+        {
+            return e1->evaluate() * e2->evaluate();
+        }
+        else if (op == '/')
+        {
+            return e1->evaluate() / e2->evaluate();
+        }
+        else if (op == '^')
+        {
+            return e1->evaluate() ^ e2->evaluate();
+        }
+        else if (op == '<')
+        {
+            return e1->evaluate() < e2->evaluate();
+        }
     }
     return value;
 };
 
 Value NovConstant::evaluate() const
 {
+    return value;
+};
+
+Value NovIdent::evaluate() const
+{
+    Value value(100);
     return value;
 };

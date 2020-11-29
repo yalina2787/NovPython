@@ -11,7 +11,6 @@ const int T_EQUAL = 374;
 const int T_INEQUAL = 375;
 const int T_STRING = 403;
 const int T_SPACE = 410;
-const int T_IDENT = 411;
 const int T_PRINT = 500;
 const int T_IF = 501;
 const int T_ELSE = 502;

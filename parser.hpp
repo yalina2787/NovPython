@@ -40,12 +40,14 @@
       know about them.  */
    enum yytokentype {
      T_INT = 258,
-     T_FLOAT = 259
+     T_FLOAT = 259,
+     T_IDENT = 260
    };
 #endif
 /* Tokens.  */
 #define T_INT 258
 #define T_FLOAT 259
+#define T_IDENT 260
 
 
 
@@ -56,10 +58,11 @@ typedef union YYSTYPE
 {
     int intValue;
     double floatValue;
+    char* identValue;
     NovExpression* expression;
 }
 /* Line 1529 of yacc.c.  */
-#line 63 "parser.hpp"
+#line 66 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

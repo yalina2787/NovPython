@@ -14,6 +14,10 @@ extern FILE *yyout;
 
 int line_no = 0;
 
+// flex -o lex.cpp lex.l
+// bison -d -o parser.cpp syntax.y
+// g++ -o nov parser.cpp lex.cpp nov-python.cpp main.cpp
+
 void parse_error(string msg, int line_no)
 {
     cout << endl;
