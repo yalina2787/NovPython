@@ -21,6 +21,13 @@
         "ratio": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp",
+        "sstream": "cpp",
+        "map": "cpp",
+        "__string": "cpp",
+        "string_view": "cpp",
+        "list": "cpp",
+        "utility": "cpp"
     }
 }

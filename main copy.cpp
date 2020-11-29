@@ -17,7 +17,6 @@ int line_no = 0;
 // flex -o lex.cpp lex.l
 // bison -d -o parser.cpp parser.y
 // g++ -o nov parser.cpp lex.cpp nov-python.cpp main.cpp
-// flex -o lex.cpp lex.l;bison -d -o parser.cpp parser.y;g++ -o nov parser.cpp lex.cpp nov-python.cpp main.cpp
 
 void parse_error(string msg, int line_no)
 {
@@ -38,6 +37,7 @@ int main(int argc, char *argv[])
         }
     }
     yyparse();
+
     /*
     int type = 0;
 

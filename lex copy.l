@@ -3,20 +3,15 @@
  * Nov Python 1.0
  */
 
-#include <iostream>
-#include <string>
 #include "types.h"
 #include "nov-python.hpp"
 #include "parser.hpp"
-
-using namespace std;
 
 extern int line_no;
 %} 
 
 %%
-"#"[^\r\n]*             { /* comments */   }
-"\n"                    { line_no++; /*return yytext[0];*/ }
+"\n"                    { line_no++; return yytext[0]; }
 [ \t\n]                 { /* whitespace */ }
 [+*-/^%=#<>():]         { return yytext[0]; }
 "+="                    { return T_PLUS_EQ; }
@@ -38,7 +33,9 @@ extern int line_no;
 "for"                   { return T_FOR; }
 [0-9]+                  { yylval.intValue = atoi(yytext); return T_INT; }
 [0-9]*\.[0-9]+          { yylval.floatValue = atof(yytext); return T_FLOAT; }
-[_a-zA-Z][a-zA-Z0-9]*   { yylval.identValue = new char[strlen(yytext)+1]; strcpy(yylval.identValue, yytext); return T_IDENT; }
+('[^'\n]*')             { return T_STRING; }
+(\"[^\"\n]*\")          { return T_STRING; }
+[_a-zA-Z][a-zA-Z0-9]*   { yylval.identValue = yytext; return T_IDENT; }
 
 .                       { return T_ERROR; }
 %%

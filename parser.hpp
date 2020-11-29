@@ -39,30 +39,42 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     T_INT = 258,
-     T_FLOAT = 259,
-     T_IDENT = 260
+     T_TRUE = 258,
+     T_FALSE = 259,
+     T_INT = 260,
+     T_FLOAT = 261,
+     T_IDENT = 262,
+     T_SPACE = 263,
+     T_PLUS_EQ = 264
    };
 #endif
 /* Tokens.  */
-#define T_INT 258
-#define T_FLOAT 259
-#define T_IDENT 260
+#define T_TRUE 258
+#define T_FALSE 259
+#define T_INT 260
+#define T_FLOAT 261
+#define T_IDENT 262
+#define T_SPACE 263
+#define T_PLUS_EQ 264
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "syntax.y"
+#line 12 "parser.y"
 {
     int intValue;
+    bool boolValue;
     double floatValue;
     char* identValue;
     NovExpression* expression;
+    NovStatement* statement;
+    NovStatementList* statementList;
+    NovProgram* program;
 }
 /* Line 1529 of yacc.c.  */
-#line 66 "parser.hpp"
+#line 78 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

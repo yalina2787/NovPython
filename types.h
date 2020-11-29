@@ -1,5 +1,5 @@
 
-const int T_PLUS_EQ = 351;
+
 const int T_MINUS_EQ = 352;
 const int T_TIMES_EQ = 353;
 const int T_DIVIDE_EQ = 354;
@@ -10,7 +10,6 @@ const int T_GREATER_EQ = 373;
 const int T_EQUAL = 374;
 const int T_INEQUAL = 375;
 const int T_STRING = 403;
-const int T_SPACE = 410;
 const int T_PRINT = 500;
 const int T_IF = 501;
 const int T_ELSE = 502;
