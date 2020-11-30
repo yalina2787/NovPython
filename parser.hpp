@@ -47,7 +47,15 @@
      T_IDENT = 263,
      T_SPACE = 264,
      T_PLUS_EQ = 265,
-     T_PRINT = 266
+     T_PRINT = 266,
+     T_INDENT = 267,
+     T_UNINDENT = 268,
+     T_IF = 269,
+     T_ELSE = 270,
+     T_WHILE = 271,
+     T_FOR = 272,
+     T_RANGE = 273,
+     T_IN = 274
    };
 #endif
 /* Tokens.  */
@@ -60,6 +68,14 @@
 #define T_SPACE 264
 #define T_PLUS_EQ 265
 #define T_PRINT 266
+#define T_INDENT 267
+#define T_UNINDENT 268
+#define T_IF 269
+#define T_ELSE 270
+#define T_WHILE 271
+#define T_FOR 272
+#define T_RANGE 273
+#define T_IN 274
 
 
 
@@ -79,7 +95,7 @@ typedef union YYSTYPE
     NovProgram* program;
 }
 /* Line 1529 of yacc.c.  */
-#line 83 "parser.hpp"
+#line 99 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

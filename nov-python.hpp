@@ -157,6 +157,35 @@ public:
             }
         }
     }
+    Value operator%(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue % b.intValue);
+            }
+            else
+            {
+                return Value(fmod(intValue,b.doubleValue));
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(fmod(doubleValue, b.intValue));
+            }
+            else
+            {
+                return Value(fmod(doubleValue, b.doubleValue));
+            }
+        }
+    }
     Value operator^(const Value &b)
     {
         if (type == 3 || b.type == 3)
@@ -212,6 +241,64 @@ public:
             else
             {
                 return Value(doubleValue < b.doubleValue);
+            }
+        }
+    }
+    Value operator<=(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue <= b.intValue);
+            }
+            else
+            {
+                return Value(intValue <= b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue <= b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue <= b.doubleValue);
+            }
+        }
+    }
+    Value operator!=(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue != b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue != b.intValue);
+            }
+            else
+            {
+                return Value(intValue != b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue != b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue != b.doubleValue);
             }
         }
     }
@@ -310,6 +397,46 @@ public:
     }
     NovStatementList() {}
     list<NovStatement *> stmtList;
+};
+
+
+class NovStmtIfElse : public NovStatement
+{
+public:
+    virtual void evaluate(Vars &vars);
+    NovStmtIfElse(NovExpression *_condition, NovStatementList *_trueStmtList, NovStatementList *_falseStmtList) 
+    : condition(_condition), trueStmtList(_trueStmtList), falseStmtList(_falseStmtList) {}
+
+protected:
+    NovExpression *condition;
+    NovStatementList *trueStmtList;
+    NovStatementList *falseStmtList;
+};
+
+class NovStmtWhile : public NovStatement
+{
+public:
+    virtual void evaluate(Vars &vars);
+    NovStmtWhile(NovExpression *_condition, NovStatementList *_loopStmtList) 
+    : condition(_condition), loopStmtList(_loopStmtList) {}
+
+protected:
+    NovExpression *condition;
+    NovStatementList *loopStmtList;
+};
+
+class NovStmtFor : public NovStatement
+{
+public:
+    virtual void evaluate(Vars &vars);
+    NovStmtFor(string _identName, NovExpression *_from, NovExpression *_to, NovStatementList *_loopStmtList) 
+    : identName(_identName), from(_from), to(_to), loopStmtList(_loopStmtList) {}
+
+protected:
+    string identName;
+    NovExpression *from;
+    NovExpression *to;
+    NovStatementList *loopStmtList;
 };
 
 class NovProgram

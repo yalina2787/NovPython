@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include "types.h"
+#include "nov-python.hpp"
+#include "parser.hpp"
 
 using namespace std;
 
@@ -38,15 +40,26 @@ int main(int argc, char *argv[])
         }
     }
     yyparse();
-    /*
+/*
     int type = 0;
-
     while ((type = yylex()))
     {
         if (type == T_ERROR)
         {
             parse_error("undefined token", line_no);
             return 0;
+        }
+        else if (type == T_INDENT)
+        {
+            printf("=> {\n");
+        }
+        else if (type == T_UNINDENT)
+        {
+            printf("=> }\n");
+        }
+        else if (type == T_EOF)
+        {
+            printf("=> End of file\n");
         }
         else if (strcmp(yytext, "\n") == 0)
         {
