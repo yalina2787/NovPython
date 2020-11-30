@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include "types.h"
 #include "nov-python.hpp"
 #include "parser.hpp"
 
@@ -40,7 +39,7 @@ int main(int argc, char *argv[])
         }
     }
     yyparse();
-/*
+    /*
     int type = 0;
     while ((type = yylex()))
     {

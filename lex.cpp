@@ -517,7 +517,6 @@ char *yytext;
 
 #include <iostream>
 #include <string>
-#include "types.h"
 #include "nov-python.hpp"
 #include "parser.hpp"
 
@@ -535,7 +534,7 @@ int indent_level = 0;          /* indentation level passed to the parser */
 
  
  
-#line 539 "lex.cpp"
+#line 538 "lex.cpp"
 
 #define INITIAL 0
 #define indent 1
@@ -719,9 +718,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 29 "lex.l"
+#line 28 "lex.l"
 
-#line 725 "lex.cpp"
+#line 724 "lex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -806,22 +805,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 30 "lex.l"
+#line 29 "lex.l"
 { current_line_indent++; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 31 "lex.l"
+#line 30 "lex.l"
 { current_line_indent = (current_line_indent + 8) & ~7; }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 32 "lex.l"
+#line 31 "lex.l"
 { current_line_indent = 0; /*ignoring blank line */ }
 	YY_BREAK
 case YY_STATE_EOF(indent):
-#line 33 "lex.l"
+#line 32 "lex.l"
 { 
                    if (current_line_indent > indent_level) {
                        indent_level++;
@@ -836,7 +835,7 @@ case YY_STATE_EOF(indent):
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 44 "lex.l"
+#line 43 "lex.l"
 {
                    unput(*yytext);
                    if (current_line_indent > indent_level) {
@@ -854,137 +853,137 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 58 "lex.l"
+#line 57 "lex.l"
 { current_line_indent = 0; line_no++; BEGIN(indent); }     
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 59 "lex.l"
+#line 58 "lex.l"
 { /* comments */   }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 60 "lex.l"
+#line 59 "lex.l"
 { /* whitespace */ }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 61 "lex.l"
+#line 60 "lex.l"
 { return yytext[0]; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 62 "lex.l"
+#line 61 "lex.l"
 { return T_PLUS_EQ; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 63 "lex.l"
+#line 62 "lex.l"
 { return T_MINUS_EQ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 64 "lex.l"
+#line 63 "lex.l"
 { return T_TIMES_EQ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 65 "lex.l"
+#line 64 "lex.l"
 { return T_DIVIDE_EQ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 66 "lex.l"
+#line 65 "lex.l"
 { return T_XOR_EQ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 67 "lex.l"
+#line 66 "lex.l"
 { return T_MOD_EQ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 68 "lex.l"
+#line 67 "lex.l"
 { return T_LESS_EQ; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 69 "lex.l"
+#line 68 "lex.l"
 { return T_GREATER_EQ; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 70 "lex.l"
+#line 69 "lex.l"
 { return T_EQUAL; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 71 "lex.l"
+#line 70 "lex.l"
 { return T_INEQUAL; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 72 "lex.l"
+#line 71 "lex.l"
 { return T_TRUE; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 73 "lex.l"
+#line 72 "lex.l"
 { return T_FALSE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 74 "lex.l"
+#line 73 "lex.l"
 { return T_PRINT; } 
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 75 "lex.l"
+#line 74 "lex.l"
 { return T_RANGE; } 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 76 "lex.l"
+#line 75 "lex.l"
 { return T_IF; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 77 "lex.l"
+#line 76 "lex.l"
 { return T_ELSE; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 78 "lex.l"
+#line 77 "lex.l"
 { return T_WHILE; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 79 "lex.l"
+#line 78 "lex.l"
 { return T_FOR; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 80 "lex.l"
+#line 79 "lex.l"
 { return T_IN; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 81 "lex.l"
+#line 80 "lex.l"
 { yylval.intValue = atoi(yytext); return T_INT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 82 "lex.l"
+#line 81 "lex.l"
 { yylval.floatValue = atof(yytext); return T_FLOAT; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 83 "lex.l"
+#line 82 "lex.l"
 { yylval.identValue = new char[strlen(yytext)+1]; strcpy(yylval.identValue, yytext); return T_IDENT; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 84 "lex.l"
+#line 83 "lex.l"
 { 
                                     int len = strlen(yytext);
                                     yylval.stringValue = new char[len+1]; 
@@ -995,7 +994,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 91 "lex.l"
+#line 90 "lex.l"
 { 
                                     int len = strlen(yytext);
                                     yylval.stringValue = new char[len+1]; 
@@ -1005,20 +1004,20 @@ YY_RULE_SETUP
                                 }
 	YY_BREAK
 case YY_STATE_EOF(normal):
-#line 99 "lex.l"
+#line 98 "lex.l"
 { current_line_indent = 0; BEGIN(indent); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 100 "lex.l"
+#line 99 "lex.l"
 { return T_ERROR; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 101 "lex.l"
+#line 100 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1022 "lex.cpp"
+#line 1021 "lex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2015,7 +2014,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 101 "lex.l"
+#line 100 "lex.l"
 
 
 
