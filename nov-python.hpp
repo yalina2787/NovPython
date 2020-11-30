@@ -171,7 +171,7 @@ public:
             }
             else
             {
-                return Value(fmod(intValue,b.doubleValue));
+                return Value(fmod(intValue, b.doubleValue));
             }
         }
         else
@@ -273,6 +273,94 @@ public:
             }
         }
     }
+    Value operator>(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue > b.intValue);
+            }
+            else
+            {
+                return Value(intValue > b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue > b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue > b.doubleValue);
+            }
+        }
+    }
+    Value operator>=(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue >= b.intValue);
+            }
+            else
+            {
+                return Value(intValue >= b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue >= b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue >= b.doubleValue);
+            }
+        }
+    }
+    Value operator==(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue == b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue == b.intValue);
+            }
+            else
+            {
+                return Value(intValue == b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue == b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue == b.doubleValue);
+            }
+        }
+    }
+
     Value operator!=(const Value &b)
     {
         if (type == 3 || b.type == 3)
@@ -312,12 +400,12 @@ class NovExpression
 public:
     virtual Value evaluate(const Vars &vars) const;
     NovExpression(){};
-    NovExpression(NovExpression *_e1, int _op, NovExpression *_e2) : e1(_e1), e2(_e2), op(_op){};
+    NovExpression(NovExpression *_e1, string _op, NovExpression *_e2) : e1(_e1), e2(_e2), op(_op){};
 
 protected:
     NovExpression *e1;
     NovExpression *e2;
-    int op;
+    string op;
 };
 
 class NovConstant : public NovExpression
@@ -399,13 +487,12 @@ public:
     list<NovStatement *> stmtList;
 };
 
-
 class NovStmtIfElse : public NovStatement
 {
 public:
     virtual void evaluate(Vars &vars);
-    NovStmtIfElse(NovExpression *_condition, NovStatementList *_trueStmtList, NovStatementList *_falseStmtList) 
-    : condition(_condition), trueStmtList(_trueStmtList), falseStmtList(_falseStmtList) {}
+    NovStmtIfElse(NovExpression *_condition, NovStatementList *_trueStmtList, NovStatementList *_falseStmtList)
+        : condition(_condition), trueStmtList(_trueStmtList), falseStmtList(_falseStmtList) {}
 
 protected:
     NovExpression *condition;
@@ -417,8 +504,8 @@ class NovStmtWhile : public NovStatement
 {
 public:
     virtual void evaluate(Vars &vars);
-    NovStmtWhile(NovExpression *_condition, NovStatementList *_loopStmtList) 
-    : condition(_condition), loopStmtList(_loopStmtList) {}
+    NovStmtWhile(NovExpression *_condition, NovStatementList *_loopStmtList)
+        : condition(_condition), loopStmtList(_loopStmtList) {}
 
 protected:
     NovExpression *condition;
@@ -429,8 +516,8 @@ class NovStmtFor : public NovStatement
 {
 public:
     virtual void evaluate(Vars &vars);
-    NovStmtFor(string _identName, NovExpression *_from, NovExpression *_to, NovStatementList *_loopStmtList) 
-    : identName(_identName), from(_from), to(_to), loopStmtList(_loopStmtList) {}
+    NovStmtFor(string _identName, NovExpression *_from, NovExpression *_to, NovStatementList *_loopStmtList)
+        : identName(_identName), from(_from), to(_to), loopStmtList(_loopStmtList) {}
 
 protected:
     string identName;

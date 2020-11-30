@@ -28,33 +28,53 @@ Value NovExpression::evaluate(const Vars &vars) const
     if (e1 != NULL && e2 != NULL)
     {
         // Binary Expression
-        if (op == '+')
+        if (op == "+")
         {
             return e1->evaluate(vars) + e2->evaluate(vars);
         }
-        else if (op == '-')
+        else if (op == "-")
         {
             return e1->evaluate(vars) - e2->evaluate(vars);
         }
-        else if (op == '*')
+        else if (op == "*")
         {
             return e1->evaluate(vars) * e2->evaluate(vars);
         }
-        else if (op == '/')
+        else if (op == "/")
         {
             return e1->evaluate(vars) / e2->evaluate(vars);
         }
-        else if (op == '%')
+        else if (op == "%")
         {
             return e1->evaluate(vars) % e2->evaluate(vars);
         }
-        else if (op == '^')
+        else if (op == "^")
         {
             return e1->evaluate(vars) ^ e2->evaluate(vars);
         }
-        else if (op == '<')
+        else if (op == "<")
         {
             return e1->evaluate(vars) < e2->evaluate(vars);
+        }
+        else if (op == ">")
+        {
+            return e1->evaluate(vars) > e2->evaluate(vars);
+        }
+        else if (op == "<=")
+        {
+            return e1->evaluate(vars) <= e2->evaluate(vars);
+        }
+        else if (op == ">=")
+        {
+            return e1->evaluate(vars) >= e2->evaluate(vars);
+        }
+        else if (op == "==")
+        {
+            return e1->evaluate(vars) == e2->evaluate(vars);
+        }
+        else if (op == "!=")
+        {
+            return e1->evaluate(vars) != e2->evaluate(vars);
         }
     }
     return value;
@@ -80,8 +100,32 @@ void NovAssignment::evaluate(Vars &vars)
     }
     else if (op == "+=")
     {
-        //cout << "Evaluate NovAssignment: " << identName << " += " << value << endl;
         value = vars.fetch(identName) + value;
+        vars.write(identName, value);
+    }
+    else if (op == "-=")
+    {
+        value = vars.fetch(identName) - value;
+        vars.write(identName, value);
+    }
+    else if (op == "*=")
+    {
+        value = vars.fetch(identName) * value;
+        vars.write(identName, value);
+    }
+    else if (op == "/=")
+    {
+        value = vars.fetch(identName) / value;
+        vars.write(identName, value);
+    }
+    else if (op == "%=")
+    {
+        value = vars.fetch(identName) % value;
+        vars.write(identName, value);
+    }
+    else if (op == "^=")
+    {
+        value = vars.fetch(identName) ^ value;
         vars.write(identName, value);
     }
     else if (op == "print")
@@ -94,27 +138,37 @@ void NovStmtIfElse::evaluate(Vars &vars)
 {
     Value value = condition->evaluate(vars);
     Value cmp = value != Value(0);
-    if(cmp.intValue != 0) {
-          if(trueStmtList != NULL) {
-              trueStmtList->evaluate(vars);
-          }
-    } else {
-          if(falseStmtList != NULL) {
-              falseStmtList->evaluate(vars);
-          }
+    if (cmp.intValue != 0)
+    {
+        if (trueStmtList != NULL)
+        {
+            trueStmtList->evaluate(vars);
+        }
+    }
+    else
+    {
+        if (falseStmtList != NULL)
+        {
+            falseStmtList->evaluate(vars);
+        }
     }
 }
 
 void NovStmtWhile::evaluate(Vars &vars)
 {
-    while(true) {
-    Value value = condition->evaluate(vars);
+    while (true)
+    {
+        Value value = condition->evaluate(vars);
         Value cmp = value != Value(0);
-        if(cmp.intValue != 0) {
-          if(loopStmtList != NULL) {
-            loopStmtList->evaluate(vars);
-          }
-        } else {
+        if (cmp.intValue != 0)
+        {
+            if (loopStmtList != NULL)
+            {
+                loopStmtList->evaluate(vars);
+            }
+        }
+        else
+        {
             break;
         }
     }
@@ -126,14 +180,19 @@ void NovStmtFor::evaluate(Vars &vars)
     Value toValue = to->evaluate(vars);
     Value cmp = fromValue <= toValue;
     Value step(1);
-    while(true) {
+    while (true)
+    {
         cmp = fromValue < toValue;
         vars.write(identName, fromValue);
-        if(cmp.intValue != 0) {
-          if(loopStmtList != NULL) {
-            loopStmtList->evaluate(vars);
-          }
-        } else {
+        if (cmp.intValue != 0)
+        {
+            if (loopStmtList != NULL)
+            {
+                loopStmtList->evaluate(vars);
+            }
+        }
+        else
+        {
             break;
         }
         fromValue = fromValue + step;

@@ -55,7 +55,17 @@
      T_WHILE = 271,
      T_FOR = 272,
      T_RANGE = 273,
-     T_IN = 274
+     T_IN = 274,
+     T_MINUS_EQ = 275,
+     T_TIMES_EQ = 276,
+     T_DIVIDE_EQ = 277,
+     T_MOD_EQ = 278,
+     T_XOR_EQ = 279,
+     T_LESS_EQ = 280,
+     T_GREATER_EQ = 281,
+     T_EQUAL = 282,
+     T_INEQUAL = 283,
+     T_ERROR = 284
    };
 #endif
 /* Tokens.  */
@@ -76,6 +86,16 @@
 #define T_FOR 272
 #define T_RANGE 273
 #define T_IN 274
+#define T_MINUS_EQ 275
+#define T_TIMES_EQ 276
+#define T_DIVIDE_EQ 277
+#define T_MOD_EQ 278
+#define T_XOR_EQ 279
+#define T_LESS_EQ 280
+#define T_GREATER_EQ 281
+#define T_EQUAL 282
+#define T_INEQUAL 283
+#define T_ERROR 284
 
 
 
@@ -95,7 +115,7 @@ typedef union YYSTYPE
     NovProgram* program;
 }
 /* Line 1529 of yacc.c.  */
-#line 99 "parser.hpp"
+#line 119 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -38,7 +38,7 @@ int indent_level = 0;          /* indentation level passed to the parser */
                        indent_level--;
                        return T_UNINDENT;
                    } else {
-                    yyterminate();
+                      yyterminate();
                    }
                  }
 <indent>.        {
@@ -63,8 +63,8 @@ int indent_level = 0;          /* indentation level passed to the parser */
 <normal>"-="                    { return T_MINUS_EQ; }
 <normal>"*="                    { return T_TIMES_EQ; }
 <normal>"/="                    { return T_DIVIDE_EQ; }
+<normal>"^="                    { return T_XOR_EQ; }
 <normal>"%="                    { return T_MOD_EQ; }
-<normal>"^="                    { return T_POW_EQ; }
 <normal>"<="                    { return T_LESS_EQ; }
 <normal>">="                    { return T_GREATER_EQ; }
 <normal>"=="                    { return T_EQUAL; }

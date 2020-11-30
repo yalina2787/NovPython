@@ -376,9 +376,9 @@ static yyconst flex_int16_t yy_accept[87] =
         3,    1,   33,    5,    7,   33,   33,    6,    8,   33,
         8,    8,    8,    8,    8,    8,   28,    8,    8,    8,
        30,   30,   30,    8,   30,   30,   30,   30,   30,   30,
-       18,    0,   31,    6,   13,    0,   32,   11,    9,   10,
+       18,    0,   31,    6,   14,    0,   32,   11,    9,   10,
        29,   12,    0,   28,   15,   17,   16,   30,   30,   30,
-       14,   30,   30,   23,   27,   30,   30,   30,   30,   30,
+       13,   30,   30,   23,   27,   30,   30,   30,   30,   30,
        30,   26,   30,   30,   30,   30,   19,   24,   30,   30,
        30,   20,   21,   22,   25,    0
     } ;
@@ -830,7 +830,7 @@ case YY_STATE_EOF(indent):
                        indent_level--;
                        return T_UNINDENT;
                    } else {
-                    yyterminate();
+                      yyterminate();
                    }
                  }
 	YY_BREAK
@@ -895,12 +895,12 @@ YY_RULE_SETUP
 case 13:
 YY_RULE_SETUP
 #line 66 "lex.l"
-{ return T_MOD_EQ; }
+{ return T_XOR_EQ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 67 "lex.l"
-{ return T_POW_EQ; }
+{ return T_MOD_EQ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
