@@ -135,9 +135,13 @@
 #include "nov-python.hpp"
 #include "parser.hpp"
 
+extern int line_no;
+extern int yyterminate();
 extern int yylex();
 
-void yyerror(const char* msg) {}
+void yyerror(const char* msg) {
+    cout<<"Error, line "<<line_no<<", syntax error"<<endl; 
+}
 
 
 /* Enabling traces.  */
@@ -160,7 +164,7 @@ void yyerror(const char* msg) {}
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 12 "parser.y"
+#line 16 "parser.y"
 {
     int intValue;
     bool boolValue;
@@ -173,7 +177,7 @@ typedef union YYSTYPE
     NovProgram* program;
 }
 /* Line 193 of yacc.c.  */
-#line 177 "parser.cpp"
+#line 181 "parser.cpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -186,7 +190,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 190 "parser.cpp"
+#line 194 "parser.cpp"
 
 #ifdef short
 # undef short
@@ -489,11 +493,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    69,    69,    70,    73,    74,    77,    78,    81,    82,
-      83,    84,    88,    89,    90,    91,    92,    93,    94,    95,
-      98,    99,   102,   105,   108,   109,   110,   111,   112,   113,
-     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
-     124,   125,   126
+       0,    74,    74,    75,    78,    79,    82,    83,    86,    87,
+      88,    89,    93,    94,    95,    96,    97,    98,    99,   100,
+     103,   104,   107,   110,   113,   114,   115,   116,   117,   118,
+     119,   120,   121,   122,   123,   124,   125,   126,   127,   128,
+     129,   130,   131
 };
 #endif
 
@@ -1471,213 +1475,213 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 69 "parser.y"
+#line 74 "parser.y"
     { (yyval.program) = new NovProgram((yyvsp[(1) - (1)].statementList)); (yyval.program)->evaluate();;}
     break;
 
   case 3:
-#line 70 "parser.y"
+#line 75 "parser.y"
     { /* empty */ ;}
     break;
 
   case 4:
-#line 73 "parser.y"
+#line 78 "parser.y"
     { (yyval.statementList) = (yyvsp[(2) - (3)].statementList);;}
     break;
 
   case 5:
-#line 74 "parser.y"
+#line 79 "parser.y"
     { (yyval.statementList) = (yyvsp[(2) - (3)].statementList);;}
     break;
 
   case 6:
-#line 77 "parser.y"
+#line 82 "parser.y"
     { (yyvsp[(1) - (2)].statementList)->push((yyvsp[(2) - (2)].statement)); (yyval.statementList) = (yyvsp[(1) - (2)].statementList);;}
     break;
 
   case 7:
-#line 78 "parser.y"
+#line 83 "parser.y"
     { (yyval.statementList) = new NovStatementList(); (yyval.statementList)->push((yyvsp[(1) - (1)].statement));;}
     break;
 
   case 8:
-#line 81 "parser.y"
+#line 86 "parser.y"
     { ;}
     break;
 
   case 9:
-#line 82 "parser.y"
+#line 87 "parser.y"
     { ;}
     break;
 
   case 10:
-#line 83 "parser.y"
+#line 88 "parser.y"
     { ;}
     break;
 
   case 11:
-#line 84 "parser.y"
+#line 89 "parser.y"
     { ;}
     break;
 
   case 12:
-#line 88 "parser.y"
+#line 93 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 13:
-#line 89 "parser.y"
+#line 94 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "+=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 14:
-#line 90 "parser.y"
+#line 95 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "-=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 15:
-#line 91 "parser.y"
+#line 96 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "*=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 16:
-#line 92 "parser.y"
+#line 97 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "/=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 17:
-#line 93 "parser.y"
+#line 98 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "%=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 18:
-#line 94 "parser.y"
+#line 99 "parser.y"
     { (yyval.statement) = new NovAssignment((yyvsp[(1) - (3)].identValue), "^=", (yyvsp[(3) - (3)].expression)); delete [] (yyvsp[(1) - (3)].identValue); ;}
     break;
 
   case 19:
-#line 95 "parser.y"
+#line 100 "parser.y"
     { (yyval.statement) = new NovAssignment("", "print", (yyvsp[(3) - (4)].expression)); ;}
     break;
 
   case 20:
-#line 98 "parser.y"
+#line 103 "parser.y"
     { (yyval.statement) = new NovStmtIfElse((yyvsp[(2) - (7)].expression), (yyvsp[(4) - (7)].statementList), (yyvsp[(7) - (7)].statementList)); ;}
     break;
 
   case 21:
-#line 99 "parser.y"
+#line 104 "parser.y"
     { (yyval.statement) = new NovStmtIfElse((yyvsp[(2) - (4)].expression), (yyvsp[(4) - (4)].statementList), NULL); ;}
     break;
 
   case 22:
-#line 102 "parser.y"
+#line 107 "parser.y"
     { (yyval.statement) = new NovStmtWhile((yyvsp[(2) - (4)].expression), (yyvsp[(4) - (4)].statementList)); ;}
     break;
 
   case 23:
-#line 105 "parser.y"
+#line 110 "parser.y"
     { (yyval.statement) = new NovStmtFor((yyvsp[(2) - (11)].identValue), (yyvsp[(6) - (11)].expression), (yyvsp[(8) - (11)].expression), (yyvsp[(11) - (11)].statementList)); ;}
     break;
 
   case 24:
-#line 108 "parser.y"
+#line 113 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "+" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 25:
-#line 109 "parser.y"
+#line 114 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "-" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 26:
-#line 110 "parser.y"
+#line 115 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "*" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 27:
-#line 111 "parser.y"
+#line 116 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "/" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 28:
-#line 112 "parser.y"
+#line 117 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "%" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 29:
-#line 113 "parser.y"
+#line 118 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "^" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 30:
-#line 114 "parser.y"
+#line 119 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "<" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 31:
-#line 115 "parser.y"
+#line 120 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), ">" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 32:
-#line 116 "parser.y"
+#line 121 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "<=" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 33:
-#line 117 "parser.y"
+#line 122 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), ">=" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 34:
-#line 118 "parser.y"
+#line 123 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "==" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 35:
-#line 119 "parser.y"
+#line 124 "parser.y"
     { (yyval.expression) = new NovExpression((yyvsp[(1) - (3)].expression), "!=" ,(yyvsp[(3) - (3)].expression)); ;}
     break;
 
   case 36:
-#line 120 "parser.y"
+#line 125 "parser.y"
     { (yyval.expression) = new NovConstant(Value((yyvsp[(1) - (1)].intValue))); ;}
     break;
 
   case 37:
-#line 121 "parser.y"
+#line 126 "parser.y"
     { (yyval.expression) = new NovConstant(Value((yyvsp[(1) - (1)].floatValue))); ;}
     break;
 
   case 38:
-#line 122 "parser.y"
+#line 127 "parser.y"
     { (yyval.expression) = new NovConstant(Value(string((yyvsp[(1) - (1)].stringValue)))); delete [] (yyvsp[(1) - (1)].stringValue); ;}
     break;
 
   case 39:
-#line 123 "parser.y"
+#line 128 "parser.y"
     { (yyval.expression) = new NovConstant(Value(true)); ;}
     break;
 
   case 40:
-#line 124 "parser.y"
+#line 129 "parser.y"
     { (yyval.expression) = new NovConstant(Value(false)); ;}
     break;
 
   case 41:
-#line 125 "parser.y"
+#line 130 "parser.y"
     { (yyval.expression) = new NovIdent(string((yyvsp[(1) - (1)].identValue))); delete [] (yyvsp[(1) - (1)].identValue); ;}
     break;
 
   case 42:
-#line 126 "parser.y"
+#line 131 "parser.y"
     { (yyval.expression) = (yyvsp[(2) - (3)].expression); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1681 "parser.cpp"
+#line 1685 "parser.cpp"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1891,6 +1895,6 @@ yyreturn:
 }
 
 
-#line 129 "parser.y"
+#line 134 "parser.y"
 
 

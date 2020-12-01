@@ -9,7 +9,7 @@
 #include "parser.hpp"
 
 using namespace std;
-
+ 
 extern int line_no;
 
 /* globals to track current indentation */
@@ -28,7 +28,7 @@ int indent_level = 0;          /* indentation level passed to the parser */
 %%
 <indent>" "      { current_line_indent++; }
 <indent>"\t"     { current_line_indent = (current_line_indent + 8) & ~7; }
-<indent>"\n"     { current_line_indent = 0; /*ignoring blank line */ }
+<indent>"\n"     { current_line_indent = 0; line_no++;  /*ignoring blank line */ }
 <indent><<EOF>>   { 
                    if (current_line_indent > indent_level) {
                        indent_level++;
@@ -96,7 +96,11 @@ int indent_level = 0;          /* indentation level passed to the parser */
                                 }
 
 <normal><<EOF>>                 { current_line_indent = 0; BEGIN(indent); }
-<normal>.                       { return T_ERROR; }
+<normal>.                       { 
+                                    cout<<"Error: line " << line_no<<", unrecognized symbol:'"<<yytext<<"'"<<endl;
+                                    yyterminate();
+                                    return T_ERROR; 
+                                }
 %%
 
 int yywrap() { 

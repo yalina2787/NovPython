@@ -4,9 +4,13 @@
 #include "nov-python.hpp"
 #include "parser.hpp"
 
+extern int line_no;
+extern int yyterminate();
 extern int yylex();
 
-void yyerror(const char* msg) {}
+void yyerror(const char* msg) {
+    cout<<"Error, line "<<line_no<<", syntax error"<<endl; 
+}
 %}
 
 %union {
@@ -63,6 +67,7 @@ void yyerror(const char* msg) {}
 %type<statement>        StmtWhile
 %type<statement>        StmtFor
 %type<expression>       Expression
+
 
 
 %%

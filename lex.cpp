@@ -521,7 +521,7 @@ char *yytext;
 #include "parser.hpp"
 
 using namespace std;
-
+ 
 extern int line_no;
 
 /* globals to track current indentation */
@@ -817,7 +817,7 @@ case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 31 "lex.l"
-{ current_line_indent = 0; /*ignoring blank line */ }
+{ current_line_indent = 0; line_no++;  /*ignoring blank line */ }
 	YY_BREAK
 case YY_STATE_EOF(indent):
 #line 32 "lex.l"
@@ -1010,14 +1010,18 @@ case YY_STATE_EOF(normal):
 case 33:
 YY_RULE_SETUP
 #line 99 "lex.l"
-{ return T_ERROR; }
+{ 
+                                    cout<<"Error: line " << line_no<<", unrecognized symbol:'"<<yytext<<"'"<<endl;
+                                    yyterminate();
+                                    return T_ERROR; 
+                                }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 100 "lex.l"
+#line 104 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1021 "lex.cpp"
+#line 1025 "lex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2014,7 +2018,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 100 "lex.l"
+#line 104 "lex.l"
 
 
 

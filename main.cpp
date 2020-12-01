@@ -13,7 +13,7 @@ extern const char *yytext;
 extern FILE *yyin;
 extern FILE *yyout;
 
-int line_no = 0;
+int line_no = 1;
 
 // flex -o lex.cpp lex.l
 // bison -d -o parser.cpp parser.y
