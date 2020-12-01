@@ -33,14 +33,14 @@ for j in range(5, 100/2):
   print(j)
 ```
 
-## 4.4 Arithmetic Operators:
+## 4.4 Arithmetic Operators (+, -, *, /, %, ^)
 ```
 print(5 + 6 * 7 / (8 - 5))
 print(1 ^ 10)
 print(10 % 2)
 ```
 
-## 4.5 Assignment Operators:
+## 4.5 Assignment Operators (=, +=, -=, *=, /=, ^=, %=)
 ```
 a = 0
 a^=1
@@ -51,7 +51,7 @@ a/=1
 a%=2
 ```
 
-## 4.6 Conditional Statements
+## 4.6 Conditional Statements (<, <=, >, >=, ==, !=)
 ```
 print(3<5)
 print(3<=5)
@@ -61,21 +61,21 @@ print(3==5)
 print(3!=5)
 ```
 
-## 4.7 Comments
+## 4.7 Comments (lines that start with a ‘#’)
 ```
 # This is a comment
 # This is another comment
 print ("This is a comment test. ")  # comment
 ```
 
-## 4.8 Output
+## 4.8 Output (printfunction)
 ```
 print(1+2)  
 print("This project is very interesting, I like it very much! ")
 print("Have a wonderful day!")
 ```
 
-## 4.9 Lexical & Syntax Error Message and error line number
+## 4.9 Support lexical, Syntax Error Message, and report error line number
 
 ```
 b = 1 @ 2 => Error: line 4, unrecognized symbol:'@'
