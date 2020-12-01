@@ -1,3 +1,5 @@
+print ("This file tests while loop and if-else blocks. ")  
+
 i = 0
 while i < 10:
     i += 1
