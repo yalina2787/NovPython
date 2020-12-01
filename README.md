@@ -94,7 +94,7 @@ g++ -o nov parser.cpp lex.cpp nov-python.cpp main.cpp
 make
 ```
 
-# 5.3 How to use NovPython to compile python source code? (Test files)
+# 6. How to use NovPython to compile python source code? (Test files)
 ```
 ./nov test/if-else.py
 ./nov test/vars-def.py
