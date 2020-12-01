@@ -5,8 +5,8 @@ Simple python interpreter for CS 4450 - It works especially well in November.
 Using C, C++, the external libraries flex and bison to implement a basic Interpreter for Python
 
 # Team information
-### Group name: NovemberSurprise
-### Group members: Alian Yu (only one member)
+##### Group name: NovemberSurprise
+##### Group members: Alian Yu (only one member)
 
 # Supported Features in NovPython Interpreter
 ## If-Else Blocks
@@ -75,7 +75,7 @@ print("This project is very interesting, I like it very much! ")
 print("Have a wonderful day!")
 ```
 
-## Lexical & Syntax Error Message & error line number
+## Lexical & Syntax Error Message and error line number
 
 ```
 b = 1 @ 2 => Error: line 4, unrecognized symbol:'@'
