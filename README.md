@@ -36,12 +36,12 @@ print(10 % 2)
 ## Assignment Operators:
 ```
 a = 0
-a+= 10
+a^=1
+a+=10
 a-=2
 a*=3
 a/=1
 a%=2
-a^=1
 ```
 
 ## Conditional Statements
