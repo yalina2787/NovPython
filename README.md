@@ -5,8 +5,8 @@ Simple python interpreter for CS 4450 - It works especially well in November.
 Using C, C++, the external libraries flex and bison to implement a basic Interpreter for Python
 
 # Team information
-Group name: NovemberSurprise
-Group members: Alian Yu (only one member)
+## Group name: NovemberSurprise
+## Group members: Alian Yu (only one member)
 
 # Supported Features in NovPython Interpreter
 ## If-Else Blocks
