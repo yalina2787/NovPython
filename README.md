@@ -82,6 +82,15 @@ b = 1 @ 2 => Error: line 4, unrecognized symbol:'@'
 iff a == 5: => Error, line 5, syntax error
 ```
 
+## 4.10 Support indent
+```
+if 9 % 2 == 0:
+  print("Even")
+else:
+  print("Odd")
+```
+
+
 # 5. Compile NovPython
 ## 5.1 How to manually compile?
 ```
