@@ -89,7 +89,55 @@ if 9 % 2 == 0:
 else:
   print("Odd")
 ```
-
+## 4.11 Support type conversion (int()<=> str())
+```
+a=str(int(123))
+b="abc"
+c=int("100")
+d=50
+print(a+b)
+print(c%d + 1)
+```
+## 4.12 Support using Break to exit the loop
+```
+for i in range(1, 20):
+    print(i)
+    if i==5:
+        break
+```
+## 4.13 Support logical operation And and Or
+'''
+for i in range(0, 100):
+    if i>=80 and (i%5==0 or i%10==0):
+        print("This number is bigger than 80 and multiples of 5: ")
+        print(i)
+'''
+## 4.14 Support Elif
+```
+a=99
+if a<=0:
+    print("Plese enter a correct number")
+if a<=60:
+    print('E')
+elif a<=70:
+    print("D")
+elif a<=80:
+    print("C")
+elif a<=90:
+    print("B")
+elif a<=95:
+    print("A")
+elif a<=99:
+    print("A+")
+else:
+    print("A++")
+```
+## 4.15 Support negative number
+```
+a= -5
+b=9
+print(a+b)
+```
 
 # 5. Compile NovPython
 ## 5.1 How to manually compile?
@@ -116,4 +164,9 @@ make
 ./nov test/output.py
 ./nov test/lexical-error.py
 ./nov test/syntax-error.py
+./nov test/type_conversion.py
+./nov test/break.py
+./nov test/logical_operation.py
+./nov test/elif.py
+./nov test/negative_number.py
 ```
