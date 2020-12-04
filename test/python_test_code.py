@@ -30,12 +30,12 @@ while charmender_HP > 0 and squirtle_HP > 0:
 # Print winner pokemon
 if charmender_HP >= 1:
     print(name+"'s Charmender won!")
-elif squirtle_HP >= 1:
+elif squirtle_HP >=1:
     print(name+"'s Squirtle won!")
 else:
     print("Something went wrong!!!")
 
-# Find primes in a given interval
+#Find primes in a given interval
 begin = 5
 end = 25
 prime_counter = 0
@@ -44,8 +44,24 @@ for num in range(begin, end):
         if(num == 2):
             print("Prime: "+str(num))
         for i in range(2, int(num/2)+2):
-            if (num % i == 0):
+            if (num%i==0):
                 break
             else:
                 print("Prime: "+str(num))
                 break
+
+
+# Some simple equations
+eq1 = 2 * -5 + 20
+print("EQ1: "+str(eq1))
+if(eq1 != 0):
+    print("eq1 output not equal to 0")
+eq2 = -2 * 3 / 12
+print("EQ2: "+str(eq2))
+
+# Uncomment this code block below for BONUS (Syntax error)
+# This is just a simple example...
+#if(eq2 == 0)
+#    print("This code shouldn't run")
+#else
+#    print "this one as well!"

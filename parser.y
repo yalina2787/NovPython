@@ -110,12 +110,12 @@ Assignment      :   T_IDENT '=' Expression          { $$ = new NovAssignment($1,
                 |   T_BREAK                         { $$ = new NovAssignment("", "break", NULL); }
                 ; 
 
-StmtIfElse      :   StmtIf T_ELSE ':' WStatementList    { cout<<"IFELSE"<<endl; ((NovStmtIfElse*)$1)->pushStatementList($4); $$ = $1; }
-                |   StmtIf                              { cout<<"IF"<<endl;$$ = $1; }
+StmtIfElse      :   StmtIf T_ELSE ':' WStatementList    { ((NovStmtIfElse*)$1)->pushStatementList($4); $$ = $1; }
+                |   StmtIf                              { $$ = $1; }
                 ;
 
-StmtIf          :   T_IF Expression ':' WStatementList          { cout<<"?"<<endl;$$ = new NovStmtIfElse($2, $4); }
-                |   StmtIf T_ELIF Expression ':' WStatementList { cout<<"??"<<endl;((NovStmtIfElse*)$1)->pushCondition($3); ((NovStmtIfElse*)$1)->pushStatementList($5); $$ = $1; }
+StmtIf          :   T_IF Expression ':' WStatementList          { $$ = new NovStmtIfElse($2, $4); }
+                |   StmtIf T_ELIF Expression ':' WStatementList { ((NovStmtIfElse*)$1)->pushCondition($3); ((NovStmtIfElse*)$1)->pushStatementList($5); $$ = $1; }
                 ;
 
 StmtWhile       :   T_WHILE Expression ':' WStatementList   { $$ = new NovStmtWhile($2, $4); }
@@ -138,6 +138,7 @@ Expression      :   Expression '+' Expression           { $$ = new NovExpression
                 |   Expression T_INEQUAL Expression     { $$ = new NovExpression($1, "!=" ,$3); }
                 |   Expression T_AND Expression         { $$ = new NovExpression($1, "&&" ,$3); }
                 |   Expression T_OR Expression          { $$ = new NovExpression($1, "||" ,$3); }
+                |   '-' Expression                      { $$ = new NovExpression(NULL, "-" ,$2); }
                 |   T_INT                               { $$ = new NovConstant(Value($1)); }
                 |   T_FLOAT                             { $$ = new NovConstant(Value($1)); }
                 |   T_STRING                            { $$ = new NovConstant(Value(string($1))); delete [] $1; }

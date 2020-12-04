@@ -107,6 +107,12 @@ Value NovExpression::evaluate(const Vars &vars) const
             v.intValue = stoi(os.str());
             return v;
         }
+        else if (op == "-")
+        {
+            Value v = e2->evaluate(vars);
+            v = Value(0) - v;
+            return v;
+        }
     }
     return value;
 };
