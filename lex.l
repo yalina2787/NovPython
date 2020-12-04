@@ -55,6 +55,7 @@ int indent_level = 0;          /* indentation level passed to the parser */
                  }
 
 <normal>"\n"                    { current_line_indent = 0; line_no++; BEGIN(indent); }     
+<normal>"\r\n"                    { current_line_indent = 0; line_no++; BEGIN(indent); }     
 <normal>"#"[^\r\n]*             { /* comments */   }
 <normal>" "                     { /* whitespace */ }
 <normal>[+*-/^%=#<>():]         { return yytext[0]; }
@@ -73,13 +74,19 @@ int indent_level = 0;          /* indentation level passed to the parser */
 <normal>"print"                 { return T_PRINT; } 
 <normal>"range"                 { return T_RANGE; } 
 <normal>"if"                    { return T_IF; }
+<normal>"elif"                  { return T_ELIF; }
 <normal>"else"                  { return T_ELSE; }
 <normal>"while"                 { return T_WHILE; }
 <normal>"for"                   { return T_FOR; }
 <normal>"in"                    { return T_IN; }
+<normal>"str"                   { return T_TSTR; }
+<normal>"int"                   { return T_TINT; }
+<normal>"break"                 { return T_BREAK; }
+<normal>"and"                   { return T_AND; }
+<normal>"or"                    { return T_OR; }
 <normal>[0-9]+                  { yylval.intValue = atoi(yytext); return T_INT; }
 <normal>[0-9]*\.[0-9]+          { yylval.floatValue = atof(yytext); return T_FLOAT; }
-<normal>[_a-zA-Z][a-zA-Z0-9]*   { yylval.identValue = new char[strlen(yytext)+1]; strcpy(yylval.identValue, yytext); return T_IDENT; }
+<normal>[_a-zA-Z][_a-zA-Z0-9]*   { yylval.identValue = new char[strlen(yytext)+1]; strcpy(yylval.identValue, yytext); return T_IDENT; }
 <normal>(\"[^\"\n]*\")          { 
                                     int len = strlen(yytext);
                                     yylval.stringValue = new char[len+1]; 

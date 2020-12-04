@@ -76,6 +76,37 @@ Value NovExpression::evaluate(const Vars &vars) const
         {
             return e1->evaluate(vars) != e2->evaluate(vars);
         }
+        else if (op == "||")
+        {
+            return e1->evaluate(vars) || e2->evaluate(vars);
+        }
+        else if (op == "&&")
+        {
+            return e1->evaluate(vars) && e2->evaluate(vars);
+        }
+    }
+    else if (e2 != NULL)
+    {
+        if (op == "str")
+        {
+            Value v = e2->evaluate(vars);
+            ostringstream os;
+            os.str("");
+            os << v;
+            v.type = 3;
+            v.stringValue = os.str();
+            return v;
+        }
+        else if (op == "int")
+        {
+            Value v = e2->evaluate(vars);
+            ostringstream os;
+            os.str("");
+            os << v;
+            v.type = 0;
+            v.intValue = stoi(os.str());
+            return v;
+        }
     }
     return value;
 };
@@ -90,52 +121,89 @@ Value NovIdent::evaluate(const Vars &vars) const
     return vars.fetch(name);
 };
 
-void NovAssignment::evaluate(Vars &vars)
+void NovAssignment::evaluate(Vars &vars, bool &breakFlag)
 {
-    Value value = e1->evaluate(vars);
-    if (op == "=")
+    if (e1 != NULL)
     {
-        //cout << "Evaluate NovAssignment: " << identName << " = " << value << endl;
-        vars.write(identName, e1->evaluate(vars));
+        Value value = e1->evaluate(vars);
+        if (op == "=")
+        {
+            //cout << "Evaluate NovAssignment: " << identName << " = " << value << endl;
+            vars.write(identName, e1->evaluate(vars));
+        }
+        else if (op == "+=")
+        {
+            value = vars.fetch(identName) + value;
+            vars.write(identName, value);
+        }
+        else if (op == "-=")
+        {
+            value = vars.fetch(identName) - value;
+            vars.write(identName, value);
+        }
+        else if (op == "*=")
+        {
+            value = vars.fetch(identName) * value;
+            vars.write(identName, value);
+        }
+        else if (op == "/=")
+        {
+            value = vars.fetch(identName) / value;
+            vars.write(identName, value);
+        }
+        else if (op == "%=")
+        {
+            value = vars.fetch(identName) % value;
+            vars.write(identName, value);
+        }
+        else if (op == "^=")
+        {
+            value = vars.fetch(identName) ^ value;
+            vars.write(identName, value);
+        }
+        else if (op == "print")
+        {
+            cout << value << endl;
+        }
     }
-    else if (op == "+=")
+    else
     {
-        value = vars.fetch(identName) + value;
-        vars.write(identName, value);
-    }
-    else if (op == "-=")
-    {
-        value = vars.fetch(identName) - value;
-        vars.write(identName, value);
-    }
-    else if (op == "*=")
-    {
-        value = vars.fetch(identName) * value;
-        vars.write(identName, value);
-    }
-    else if (op == "/=")
-    {
-        value = vars.fetch(identName) / value;
-        vars.write(identName, value);
-    }
-    else if (op == "%=")
-    {
-        value = vars.fetch(identName) % value;
-        vars.write(identName, value);
-    }
-    else if (op == "^=")
-    {
-        value = vars.fetch(identName) ^ value;
-        vars.write(identName, value);
-    }
-    else if (op == "print")
-    {
-        cout << value << endl;
+        if (op == "break")
+        {
+            breakFlag = true;
+        }
     }
 }
 
-void NovStmtIfElse::evaluate(Vars &vars)
+void NovStmtIfElse::evaluate(Vars &vars, bool &breakFlag)
 {
+
+    list<NovExpression *>::iterator eit = conditions.begin();
+    list<NovStatementList *>::iterator sit = stmtLists.begin();
+
+    bool flag = false;
+    for (eit = conditions.begin(); eit != conditions.end(); eit++, sit++)
+    {
+        if (!flag)
+        {
+
+            Value value = (*eit)->evaluate(vars);
+            Value cmp = value != Value(0);
+            if (cmp.intValue != 0)
+            {
+                (*sit)->evaluate(vars, breakFlag);
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag && sit != stmtLists.end())
+    {
+
+        (*sit)->evaluate(vars, breakFlag);
+    }
+
+    /*
     Value value = condition->evaluate(vars);
     Value cmp = value != Value(0);
     if (cmp.intValue != 0)
@@ -151,10 +219,10 @@ void NovStmtIfElse::evaluate(Vars &vars)
         {
             falseStmtList->evaluate(vars);
         }
-    }
+    }*/
 }
 
-void NovStmtWhile::evaluate(Vars &vars)
+void NovStmtWhile::evaluate(Vars &vars, bool &breakFlag)
 {
     while (true)
     {
@@ -164,7 +232,11 @@ void NovStmtWhile::evaluate(Vars &vars)
         {
             if (loopStmtList != NULL)
             {
-                loopStmtList->evaluate(vars);
+                loopStmtList->evaluate(vars, breakFlag);
+                if (breakFlag)
+                {
+                    break;
+                }
             }
         }
         else
@@ -172,9 +244,10 @@ void NovStmtWhile::evaluate(Vars &vars)
             break;
         }
     }
+    breakFlag = false;
 }
 
-void NovStmtFor::evaluate(Vars &vars)
+void NovStmtFor::evaluate(Vars &vars, bool &breakFlag)
 {
     Value fromValue = from->evaluate(vars);
     Value toValue = to->evaluate(vars);
@@ -188,7 +261,11 @@ void NovStmtFor::evaluate(Vars &vars)
         {
             if (loopStmtList != NULL)
             {
-                loopStmtList->evaluate(vars);
+                loopStmtList->evaluate(vars, breakFlag);
+                if (breakFlag)
+                {
+                    break;
+                }
             }
         }
         else
@@ -197,25 +274,31 @@ void NovStmtFor::evaluate(Vars &vars)
         }
         fromValue = fromValue + step;
     }
+    breakFlag = false;
 }
 
-void NovStatement::evaluate(Vars &vars)
+void NovStatement::evaluate(Vars &vars, bool &breakFlag)
 {
     //cout << "Evaluate NovStatement" << endl;
 }
 
-void NovStatementList::evaluate(Vars &vars)
+void NovStatementList::evaluate(Vars &vars, bool &breakFlag)
 {
     //cout << "Evaluate NovStatementList" << endl;
     list<NovStatement *>::iterator it = stmtList.begin();
     for (it = stmtList.begin(); it != stmtList.end(); it++)
     {
-        (*it)->evaluate(vars);
+        (*it)->evaluate(vars, breakFlag);
+        if (breakFlag)
+        {
+            break;
+        }
     }
 }
 
 void NovProgram::evaluate()
 {
     //cout << "Evaluate NovProgram" << endl;
-    statmentList->evaluate(vars);
+    bool breakFlag = false;
+    statmentList->evaluate(vars, breakFlag);
 }

@@ -1,6 +1,7 @@
 #ifndef NOV_PYTHON_H
 #define NOV_PYTHON_H
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <map>
 #include <list>
@@ -390,6 +391,66 @@ public:
             }
         }
     }
+
+    Value operator||(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue || b.intValue);
+            }
+            else
+            {
+                return Value(intValue || b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue || b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue || b.doubleValue);
+            }
+        }
+    }
+
+    Value operator&&(const Value &b)
+    {
+        if (type == 3 || b.type == 3)
+        {
+            return Value(stringValue + b.stringValue);
+        }
+        else if (type == 0 || type == 2)
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(intValue && b.intValue);
+            }
+            else
+            {
+                return Value(intValue && b.doubleValue);
+            }
+        }
+        else
+        {
+            if (b.type == 0 || b.type == 2)
+            {
+                return Value(doubleValue && b.intValue);
+            }
+            else
+            {
+                return Value(doubleValue && b.doubleValue);
+            }
+        }
+    }
 };
 class Vars;
 
@@ -459,51 +520,60 @@ public:
 class NovStatement
 {
 public:
-    virtual void evaluate(Vars &vars);
-    NovStatement() {}
+    virtual void evaluate(Vars &vars, bool &breakFlag);
+    NovStatement() : op("") {}
+    string op;
 };
 
 class NovAssignment : public NovStatement
 {
 public:
-    virtual void evaluate(Vars &vars);
-    NovAssignment(string _identName, string _op, NovExpression *_e1) : identName(_identName), e1(_e1), op(_op) {}
+    virtual void evaluate(Vars &vars, bool &breakFlag);
+    NovAssignment(string _identName, string _op, NovExpression *_e1) : identName(_identName), e1(_e1) { op = _op; }
 
 protected:
     NovExpression *e1;
     string identName;
-    string op;
 };
 
 class NovStatementList
 {
 public:
-    void evaluate(Vars &vars);
+    void evaluate(Vars &vars, bool &breakFlag);
     void push(NovStatement *stmt)
     {
         stmtList.push_back(stmt);
     }
     NovStatementList() {}
+    NovStatementList(NovStatement *stmt) { push(stmt); }
     list<NovStatement *> stmtList;
 };
 
 class NovStmtIfElse : public NovStatement
 {
 public:
-    virtual void evaluate(Vars &vars);
-    NovStmtIfElse(NovExpression *_condition, NovStatementList *_trueStmtList, NovStatementList *_falseStmtList)
-        : condition(_condition), trueStmtList(_trueStmtList), falseStmtList(_falseStmtList) {}
-
-protected:
-    NovExpression *condition;
-    NovStatementList *trueStmtList;
-    NovStatementList *falseStmtList;
+    virtual void evaluate(Vars &vars, bool &breakFlag);
+    NovStmtIfElse(NovExpression *condition, NovStatementList *trueStmtList)
+    {
+        pushCondition(condition);
+        pushStatementList(trueStmtList);
+    }
+    void pushCondition(NovExpression *condition)
+    {
+        conditions.push_back(condition);
+    }
+    void pushStatementList(NovStatementList *stmtList)
+    {
+        stmtLists.push_back(stmtList);
+    }
+    list<NovExpression *> conditions;
+    list<NovStatementList *> stmtLists;
 };
 
 class NovStmtWhile : public NovStatement
 {
 public:
-    virtual void evaluate(Vars &vars);
+    virtual void evaluate(Vars &vars, bool &breakFlag);
     NovStmtWhile(NovExpression *_condition, NovStatementList *_loopStmtList)
         : condition(_condition), loopStmtList(_loopStmtList) {}
 
@@ -515,7 +585,7 @@ protected:
 class NovStmtFor : public NovStatement
 {
 public:
-    virtual void evaluate(Vars &vars);
+    virtual void evaluate(Vars &vars, bool &breakFlag);
     NovStmtFor(string _identName, NovExpression *_from, NovExpression *_to, NovStatementList *_loopStmtList)
         : identName(_identName), from(_from), to(_to), loopStmtList(_loopStmtList) {}
 

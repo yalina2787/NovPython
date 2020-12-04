@@ -51,21 +51,27 @@
      T_INDENT = 267,
      T_UNINDENT = 268,
      T_IF = 269,
-     T_ELSE = 270,
-     T_WHILE = 271,
-     T_FOR = 272,
-     T_RANGE = 273,
-     T_IN = 274,
-     T_MINUS_EQ = 275,
-     T_TIMES_EQ = 276,
-     T_DIVIDE_EQ = 277,
-     T_MOD_EQ = 278,
-     T_XOR_EQ = 279,
-     T_LESS_EQ = 280,
-     T_GREATER_EQ = 281,
-     T_EQUAL = 282,
-     T_INEQUAL = 283,
-     T_ERROR = 284
+     T_ELIF = 270,
+     T_ELSE = 271,
+     T_WHILE = 272,
+     T_FOR = 273,
+     T_RANGE = 274,
+     T_IN = 275,
+     T_MINUS_EQ = 276,
+     T_TIMES_EQ = 277,
+     T_DIVIDE_EQ = 278,
+     T_MOD_EQ = 279,
+     T_XOR_EQ = 280,
+     T_LESS_EQ = 281,
+     T_GREATER_EQ = 282,
+     T_EQUAL = 283,
+     T_INEQUAL = 284,
+     T_ERROR = 285,
+     T_TSTR = 286,
+     T_TINT = 287,
+     T_BREAK = 288,
+     T_AND = 289,
+     T_OR = 290
    };
 #endif
 /* Tokens.  */
@@ -81,21 +87,27 @@
 #define T_INDENT 267
 #define T_UNINDENT 268
 #define T_IF 269
-#define T_ELSE 270
-#define T_WHILE 271
-#define T_FOR 272
-#define T_RANGE 273
-#define T_IN 274
-#define T_MINUS_EQ 275
-#define T_TIMES_EQ 276
-#define T_DIVIDE_EQ 277
-#define T_MOD_EQ 278
-#define T_XOR_EQ 279
-#define T_LESS_EQ 280
-#define T_GREATER_EQ 281
-#define T_EQUAL 282
-#define T_INEQUAL 283
-#define T_ERROR 284
+#define T_ELIF 270
+#define T_ELSE 271
+#define T_WHILE 272
+#define T_FOR 273
+#define T_RANGE 274
+#define T_IN 275
+#define T_MINUS_EQ 276
+#define T_TIMES_EQ 277
+#define T_DIVIDE_EQ 278
+#define T_MOD_EQ 279
+#define T_XOR_EQ 280
+#define T_LESS_EQ 281
+#define T_GREATER_EQ 282
+#define T_EQUAL 283
+#define T_INEQUAL 284
+#define T_ERROR 285
+#define T_TSTR 286
+#define T_TINT 287
+#define T_BREAK 288
+#define T_AND 289
+#define T_OR 290
 
 
 
@@ -115,7 +127,7 @@ typedef union YYSTYPE
     NovProgram* program;
 }
 /* Line 1529 of yacc.c.  */
-#line 119 "parser.hpp"
+#line 131 "parser.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
