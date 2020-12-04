@@ -169,5 +169,5 @@ make
 ./nov test/logical_operation.py
 ./nov test/elif.py
 ./nov test/negative_number.py
-./nov python_test_code.py
+./nov test/python_test_code.py
 ```
