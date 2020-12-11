@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <list>
+#include <math.h>
 
 using namespace std;
 using std::string;

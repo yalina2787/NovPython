@@ -2,7 +2,8 @@
 Simple python interpreter for CS 4450 - It works especially well in November. 
 
 # 2. Requirement
-Using C, C++, the external libraries flex and bison to implement a basic Interpreter for Python
+The project is written by C/C++, with the external libraries flex and bison to implement a basic Interpreter for Python.
+Compiled by g++, tested under macOS 10.15 and raspbian (Linux).
 
 # 3. Team information
 ##### 3.1 Group name: NovemberSurprise
